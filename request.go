@@ -27,6 +27,7 @@ type RequestOption func(o *RequestOptions)
 // DoRegularRequest adds generic test functionality
 func DoRegularRequest(requestVerb, url string, opts ...RequestOption) (*Response, error) {
 	ro := newRequestOptions(opts...)
+	defer putRequestOptions(ro)
 	return buildResponse(buildRequest(requestVerb, url, ro, nil))
 }
 

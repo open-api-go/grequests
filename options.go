@@ -117,21 +117,21 @@ type RequestOptions struct {
 	// BeforeRequest is a hook that can be used to modify the request object
 	// before the request has been fired. This is useful for adding authentication
 	// and other functionality not provided in this library
-	BeforeRequest func(req *http.Request) error
+	BeforeRequest func(req *http.Request) error `json:"-"`
 
 	// LocalAddr allows you to send the request on any local interface
 	LocalAddr *net.TCPAddr
 }
 
 func newRequestOptions(opts ...RequestOption) *RequestOptions {
-	opt := RequestOptions{}
+	opt := getRequestOptions()
 	for _, o := range opts {
 		if o == nil {
 			continue
 		}
-		o(&opt)
+		o(opt)
 	}
-	return &opt
+	return opt
 }
 
 // Data is a map of key values that will eventually convert into the

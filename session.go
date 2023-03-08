@@ -69,6 +69,7 @@ func (s *Session) combineRequestOptions(ro *RequestOptions) *RequestOptions {
 func (s *Session) Get(url string, opts ...RequestOption) (*Response, error) {
 	ro := newRequestOptions(opts...)
 	ro = s.combineRequestOptions(ro)
+	defer putRequestOptions(ro)
 	return doSessionRequest("GET", url, ro, s.HTTPClient)
 }
 
@@ -80,6 +81,7 @@ func (s *Session) Get(url string, opts ...RequestOption) (*Response, error) {
 func (s *Session) Put(url string, opts ...RequestOption) (*Response, error) {
 	ro := newRequestOptions(opts...)
 	ro = s.combineRequestOptions(ro)
+	defer putRequestOptions(ro)
 	return doSessionRequest("PUT", url, ro, s.HTTPClient)
 }
 
@@ -91,6 +93,7 @@ func (s *Session) Put(url string, opts ...RequestOption) (*Response, error) {
 func (s *Session) Patch(url string, opts ...RequestOption) (*Response, error) {
 	ro := newRequestOptions(opts...)
 	ro = s.combineRequestOptions(ro)
+	defer putRequestOptions(ro)
 	return doSessionRequest("PATCH", url, ro, s.HTTPClient)
 }
 
@@ -102,6 +105,7 @@ func (s *Session) Patch(url string, opts ...RequestOption) (*Response, error) {
 func (s *Session) Delete(url string, opts ...RequestOption) (*Response, error) {
 	ro := newRequestOptions(opts...)
 	ro = s.combineRequestOptions(ro)
+	defer putRequestOptions(ro)
 	return doSessionRequest("DELETE", url, ro, s.HTTPClient)
 }
 
@@ -113,6 +117,7 @@ func (s *Session) Delete(url string, opts ...RequestOption) (*Response, error) {
 func (s *Session) Post(url string, opts ...RequestOption) (*Response, error) {
 	ro := newRequestOptions(opts...)
 	ro = s.combineRequestOptions(ro)
+	defer putRequestOptions(ro)
 	return doSessionRequest("POST", url, ro, s.HTTPClient)
 }
 
@@ -124,6 +129,7 @@ func (s *Session) Post(url string, opts ...RequestOption) (*Response, error) {
 func (s *Session) Head(url string, opts ...RequestOption) (*Response, error) {
 	ro := newRequestOptions(opts...)
 	ro = s.combineRequestOptions(ro)
+	defer putRequestOptions(ro)
 	return doSessionRequest("HEAD", url, ro, s.HTTPClient)
 }
 
@@ -135,6 +141,7 @@ func (s *Session) Head(url string, opts ...RequestOption) (*Response, error) {
 func (s *Session) Options(url string, opts ...RequestOption) (*Response, error) {
 	ro := newRequestOptions(opts...)
 	ro = s.combineRequestOptions(ro)
+	defer putRequestOptions(ro)
 	return doSessionRequest("OPTIONS", url, ro, s.HTTPClient)
 }
 
