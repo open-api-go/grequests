@@ -35,11 +35,11 @@ var (
 	// `RequestOptions` structure
 	RedirectLimitNum = 30
 
-	// SensitiveHTTPHeaders is a map of sensitive HTTP headers that a user
+	// SensitiveHeaders is a map of sensitive HTTP headers that a user
 	// doesn't want passed on a redirect. This is the global variable, if you
 	// wish to set this on a request by request basis, set it within the
 	// `RequestOptions` structure
-	SensitiveHTTPHeaders = map[string]struct{}{
+	SensitiveHeaders = map[string]struct{}{
 		"Www-Authenticate":    {},
 		"Authorization":       {},
 		"Proxy-Authorization": {},
@@ -70,7 +70,7 @@ func addRedirectFunctionality(client *http.Client, ro *RequestOptions) {
 		}
 
 		if ro.SensitiveHTTPHeaders == nil {
-			ro.SensitiveHTTPHeaders = SensitiveHTTPHeaders
+			ro.SensitiveHTTPHeaders = SensitiveHeaders
 		}
 
 		for k, vv := range via[0].Header {

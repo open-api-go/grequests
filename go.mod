@@ -1,4 +1,4 @@
-module github.com/open-api-go/grequest
+module github.com/open-api-go/grequests
 
 go 1.16
 

@@ -126,6 +126,9 @@ type RequestOptions struct {
 func newRequestOptions(opts ...RequestOption) *RequestOptions {
 	opt := RequestOptions{}
 	for _, o := range opts {
+		if o == nil {
+			continue
+		}
 		o(&opt)
 	}
 	return &opt
@@ -292,7 +295,7 @@ func HTTPClient(c *http.Client) RequestOption {
 
 // SensitiveHTTPHeaders is a map of sensitive HTTP headers that a user
 // doesn't want passed on a redirect.
-func SensitiveHeaders(h map[string]struct{}) RequestOption {
+func SensitiveHTTPHeaders(h map[string]struct{}) RequestOption {
 	return func(o *RequestOptions) {
 		o.SensitiveHTTPHeaders = h
 	}
