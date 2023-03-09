@@ -12,16 +12,15 @@ type Session struct {
 	HTTPClient *http.Client
 }
 
-// NewSession returns a session struct which enables can be used to maintain establish a persistent state with the
-// server
-// This function will set UseCookieJar to true as that is the purpose of using the session
+// NewSession returns a session struct which use common options
 func NewSession(opts ...RequestOption) *Session {
 	ro := newRequestOptions(opts...)
 	if ro == nil {
 		ro = &RequestOptions{}
 	}
 
-	ro.UseCookieJar = true
+	// remove session cookie jar
+	// ro.UseCookieJar = true
 
 	return &Session{RequestOptions: ro, HTTPClient: BuildHTTPClient(*ro)}
 }
@@ -63,9 +62,9 @@ func (s *Session) combineRequestOptions(ro *RequestOptions) *RequestOptions {
 
 // Get takes 2 parameters and returns a Response Struct. These two options are:
 // 	1. A URL
-// 	2. A RequestOptions struct
+// 	2. A RequestOption list
 // If you do not intend to use the `RequestOptions` you can just pass nil
-// A new session is created by calling NewSession with a request options struct
+// A new session is created by calling NewSession with a request option list
 func (s *Session) Get(url string, opts ...RequestOption) (*Response, error) {
 	ro := newRequestOptions(opts...)
 	ro = s.combineRequestOptions(ro)
@@ -75,9 +74,9 @@ func (s *Session) Get(url string, opts ...RequestOption) (*Response, error) {
 
 // Put takes 2 parameters and returns a Response struct. These two options are:
 // 	1. A URL
-// 	2. A RequestOptions struct
+// 	2. A RequestOption list
 // If you do not intend to use the `RequestOptions` you can just pass nil
-// A new session is created by calling NewSession with a request options struct
+// A new session is created by calling NewSession with a request option list
 func (s *Session) Put(url string, opts ...RequestOption) (*Response, error) {
 	ro := newRequestOptions(opts...)
 	ro = s.combineRequestOptions(ro)
@@ -87,9 +86,9 @@ func (s *Session) Put(url string, opts ...RequestOption) (*Response, error) {
 
 // Patch takes 2 parameters and returns a Response struct. These two options are:
 // 	1. A URL
-// 	2. A RequestOptions struct
+// 	2. A RequestOption list
 // If you do not intend to use the `RequestOptions` you can just pass nil
-// A new session is created by calling NewSession with a request options struct
+// A new session is created by calling NewSession with a request option list
 func (s *Session) Patch(url string, opts ...RequestOption) (*Response, error) {
 	ro := newRequestOptions(opts...)
 	ro = s.combineRequestOptions(ro)
@@ -99,9 +98,9 @@ func (s *Session) Patch(url string, opts ...RequestOption) (*Response, error) {
 
 // Delete takes 2 parameters and returns a Response struct. These two options are:
 // 	1. A URL
-// 	2. A RequestOptions struct
+// 	2. A RequestOption list
 // If you do not intend to use the `RequestOptions` you can just pass nil
-// A new session is created by calling NewSession with a request options struct
+// A new session is created by calling NewSession with a request option list
 func (s *Session) Delete(url string, opts ...RequestOption) (*Response, error) {
 	ro := newRequestOptions(opts...)
 	ro = s.combineRequestOptions(ro)
@@ -111,9 +110,9 @@ func (s *Session) Delete(url string, opts ...RequestOption) (*Response, error) {
 
 // Post takes 2 parameters and returns a Response channel. These two options are:
 // 	1. A URL
-// 	2. A RequestOptions struct
+// 	2. A RequestOption list
 // If you do not intend to use the `RequestOptions` you can just pass nil
-// A new session is created by calling NewSession with a request options struct
+// A new session is created by calling NewSession with a request option list
 func (s *Session) Post(url string, opts ...RequestOption) (*Response, error) {
 	ro := newRequestOptions(opts...)
 	ro = s.combineRequestOptions(ro)
@@ -123,9 +122,9 @@ func (s *Session) Post(url string, opts ...RequestOption) (*Response, error) {
 
 // Head takes 2 parameters and returns a Response channel. These two options are:
 // 	1. A URL
-// 	2. A RequestOptions struct
+// 	2. A RequestOption list
 // If you do not intend to use the `RequestOptions` you can just pass nil
-// A new session is created by calling NewSession with a request options struct
+// A new session is created by calling NewSession with a request option list
 func (s *Session) Head(url string, opts ...RequestOption) (*Response, error) {
 	ro := newRequestOptions(opts...)
 	ro = s.combineRequestOptions(ro)
@@ -135,9 +134,9 @@ func (s *Session) Head(url string, opts ...RequestOption) (*Response, error) {
 
 // Options takes 2 parameters and returns a Response struct. These two options are:
 // 	1. A URL
-// 	2. A RequestOptions struct
+// 	2. A RequestOption list
 // If you do not intend to use the `RequestOptions` you can just pass nil
-// A new session is created by calling NewSession with a request options struct
+// A new session is created by calling NewSession with a request option list
 func (s *Session) Options(url string, opts ...RequestOption) (*Response, error) {
 	ro := newRequestOptions(opts...)
 	ro = s.combineRequestOptions(ro)
