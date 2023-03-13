@@ -176,11 +176,24 @@ func XML(XML interface{}) RequestOption {
 	}
 }
 
-// Headers if you want to add custom HTTP headers to the request,
+// Headers if you want to set custom HTTP headers to the request,
 // this is your friend
 func Headers(h map[string]string) RequestOption {
 	return func(o *RequestOptions) {
 		o.Headers = h
+	}
+}
+
+// AddHeaders if you want to add custom HTTP headers to the request,
+// this is your friend
+func AddHeaders(h map[string]string) RequestOption {
+	return func(o *RequestOptions) {
+		if o.Headers == nil {
+			o.Headers = make(map[string]string)
+		}
+		for k, v := range h {
+			o.Headers[k] = v
+		}
 	}
 }
 
