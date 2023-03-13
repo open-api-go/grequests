@@ -149,6 +149,18 @@ func Params(p map[string]string) RequestOption {
 	}
 }
 
+// AddParams is a map of query strings that may be used within a GET request
+func AddParams(p map[string]string) RequestOption {
+	return func(o *RequestOptions) {
+		if o.Params == nil {
+			o.Params = make(map[string]string)
+		}
+		for k, v := range p {
+			o.Params[k] = v
+		}
+	}
+}
+
 // QueryStruct is a struct that encapsulates a set of URL query params
 // this paramter is mutually exclusive with `Params map[string]string` (they cannot be combined)
 // for more information please see https://godoc.org/github.com/google/go-querystring/query
